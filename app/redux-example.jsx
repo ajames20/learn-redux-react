@@ -1,3 +1,13 @@
-import redux from 'redux';
+const redux = require('redux');
 
 console.log('Starting redux example');
+
+const reducer = (state = { name: 'Anonymous' }, action) => {
+  // state = state || {name: 'Anonymous'};
+
+  return state;
+};
+const store = redux.createStore(reducer);
+
+const currentState = store.getState();
+console.log('currentState', currentState);
