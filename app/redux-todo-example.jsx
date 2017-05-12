@@ -9,8 +9,24 @@ let defaultState = {
 };
 
 const reducer = (state = defaultState, action) => {
-  return state;
+  switch (action.type) {
+    case 'CHANGE_SEARCH_TEXT':
+      return {
+        ...state,
+        searchText: action.searchText
+      };
+    default:
+      return state;
+  }
 };
-const store = redux.createStore(reducer);
 
-console.log('currentState', store.getState());
+const store = redux.createStore(reducer);
+const currentState = store.getState();
+console.log('currentState', currentState);
+
+store.dispatch({
+  type: 'CHANGE_SEARCH_TEXT',
+  searchText: 'Searching'
+});
+
+console.log('Search Text should Searching', store.getState());
