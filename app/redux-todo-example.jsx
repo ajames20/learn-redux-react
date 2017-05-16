@@ -20,13 +20,31 @@ const reducer = (state = defaultState, action) => {
   }
 };
 
-const store = redux.createStore(reducer);
+const store = redux.createStore(
+  reducer,
+  redux.compose(window.devToolsExtension ? window.devToolsExtension() : f => f)
+);
+
 const currentState = store.getState();
-console.log('currentState', currentState);
+
+let unsucribe = store.subscribe(() => {
+  var state = store.getState();
+  console.log('Name is: ', state.searchText);
+  document.getElementById('app').innerHTML = state.searchText;
+});
+// unsucribe(); allows you to unsuscribe from subscribe
 
 store.dispatch({
   type: 'CHANGE_SEARCH_TEXT',
   searchText: 'Searching'
 });
 
-console.log('Search Text should Searching', store.getState());
+store.dispatch({
+  type: 'CHANGE_SEARCH_TEXT',
+  searchText: 'Finding'
+});
+
+store.dispatch({
+  type: 'CHANGE_SEARCH_TEXT',
+  searchText: 'Lost'
+});

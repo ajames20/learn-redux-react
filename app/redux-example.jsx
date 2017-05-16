@@ -8,6 +8,10 @@ const reducer = (state = { name: 'Anonymous' }, action) => {
   return state;
 };
 const store = redux.createStore(reducer);
+// Subcribe to changes
+store.subscribe(() => {
+  var state = store.getState();
+  console.log('Name is: ', state.name);
+});
 
 const currentState = store.getState();
-console.log('currentState', currentState);
